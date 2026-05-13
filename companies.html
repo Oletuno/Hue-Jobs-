@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>HueJobs | Top Companies - 450+ Leading Employers</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #fef9e6 0%, #ffe6f0 100%);
+      color: #1e1e2f;
+      overflow-x: hidden;
+    }
+
+    /* vibrant blob background */
+    .blob-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.35;
+      animation: float 18s infinite ease-in-out;
+    }
+    .blob-1 {
+      width: 50vw;
+      height: 50vw;
+      background: #ffb347;
+      top: -20vh;
+      left: -15vw;
+      animation-duration: 22s;
+    }
+    .blob-2 {
+      width: 45vw;
+      height: 45vw;
+      background: #ff6ec7;
+      bottom: -10vh;
+      right: -10vw;
+      animation-duration: 26s;
+    }
+    .blob-3 {
+      width: 40vw;
+      height: 40vw;
+      background: #4facfe;
+      top: 40%;
+      left: 60%;
+      animation-duration: 28s;
+    }
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(3%, 5%) scale(1.05); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.9rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff8c5a, #ff6ec7);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .logo i {
+      color: #ff6ec7;
+      font-size: 2.2rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #1e293b;
+      transition: 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #ff6ec7;
+    }
+    .btn-outline-bright {
+      border: 2px solid #ff8c5a;
+      background: white;
+      padding: 8px 20px;
+      border-radius: 60px;
+      font-weight: 700;
+      color: #ff8c5a;
+      transition: 0.25s;
+    }
+    .btn-solid-glow {
+      background: linear-gradient(95deg, #ff6ec7, #ffb347);
+      padding: 8px 24px;
+      border-radius: 60px;
+      font-weight: 700;
+      color: white;
+      border: none;
+      box-shadow: 0 8px 18px rgba(255, 110, 199, 0.3);
+    }
+
+    /* search & filter */
+    .search-section {
+      background: rgba(255,255,245,0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      padding: 25px 30px;
+      margin: 30px 0 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .search-box {
+      flex: 2;
+      display: flex;
+      background: white;
+      border-radius: 60px;
+      padding: 5px 20px;
+      align-items: center;
+      border: 1px solid #ffe0cc;
+    }
+    .search-box i {
+      color: #ff8c5a;
+    }
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 14px 12px;
+      font-size: 1rem;
+      background: transparent;
+    }
+    .industry-filter {
+      background: white;
+      padding: 12px 24px;
+      border-radius: 60px;
+      border: 1px solid #ffe0cc;
+      outline: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .results-count {
+      font-weight: 700;
+      background: #ffecb3;
+      padding: 8px 20px;
+      border-radius: 40px;
+    }
+
+    /* companies grid */
+    .companies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+    .company-card {
+      background: rgba(255,255,250,0.95);
+      backdrop-filter: blur(4px);
+      border-radius: 32px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid rgba(255,200,100,0.5);
+    }
+    .company-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 35px -12px rgba(255,110,199,0.3);
+      background: white;
+    }
+    .company-logo {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, #fff0f5, #ffe6f0);
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ff6ec7;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+      transition: 0.2s;
+    }
+    .company-card:hover .company-logo {
+      transform: scale(1.02);
+    }
+    .company-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .company-industry {
+      color: #ff8c5a;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+    .company-location {
+      font-size: 0.85rem;
+      color: #5b6e8c;
+      margin-bottom: 12px;
+    }
+    .job-count-badge {
+      display: inline-block;
+      background: linear-gradient(95deg, #2bcbba, #3b82f6);
+      color: white;
+      padding: 5px 14px;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0 50px;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      background: white;
+      border: 1px solid #ffe0cc;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .page-btn.active {
+      background: linear-gradient(95deg, #ff6ec7, #ffb347);
+      color: white;
+      border: none;
+    }
+    .page-btn:hover:not(.active) {
+      background: #ffecdc;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+ backdrop-filter: blur(8px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 48px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 30px;
+      position: relative;
+      animation: modalFadeIn 0.3s ease;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-header {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 2px dashed #ffd9b5;
+    }
+    .modal-logo {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #ff6ec7, #ffb347);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+    }
+    .modal-title h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+    .close-modal {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #ff6ec7;
+      transition: 0.2s;
+    }
+    .vacancies-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+    .vacancy-item {
+      background: #fef9e6;
+      border-radius: 24px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      transition: 0.2s;
+      border-left: 5px solid #ff6ec7;
+    }
+    .vacancy-info h4 {
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+    .vacancy-info p {
+      font-size: 0.8rem;
+      color: #5b6e8c;
+    }
+    .apply-btn-sm {
+      background: linear-gradient(95deg, #2bcbba, #3b82f6);
+      border: none;
+      padding: 8px 24px;
+      border-radius: 60px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 40px 0 30px;
+      border-top: 2px dashed rgba(255,110,199,0.3);
+      margin-top: 20px;
+    }
+    @media (max-width: 700px) {
+      .container { padding: 0 20px; }
+      .search-section { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+<div class="blob-bg">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="container">
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fas fa-building"></i>
+      <span>Hue<span style="color:#ff6ec7">Companies</span></span>
+    </div>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="find-jobs.html">Find Jobs</a>
+      <a href="companies.html" class="active">Companies</a>
+      <a href="login.html" class="btn-outline-bright">Login</a>
+      <a href="post a job.html" class="btn-solid-glow">Post a Job</a>
+    </div>
+  </nav>
+
+  <div class="search-section">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="companySearch" placeholder="Search by company name...">
+    </div>
+    <select id="industryFilter" class="industry-filter">
+      <option value="">All Industries</option>
+      <option value="Technology">Technology</option>
+      <option value="Design">Design / Creative</option>
+      <option value="Finance">Finance</option>
+      <option value="Healthcare">Healthcare</option>
+      <option value="Marketing">Marketing & Sales</option>
+      <option value="Education">Education</option>
+      <option value="Manufacturing">Manufacturing</option>
+      <option value="Retail">Retail</option>
+    </select>
+    <div class="results-count" id="companyCount">Loading 450+ companies...</div>
+  </div>
+
+  <div id="companiesGrid" class="companies-grid"></div>
+  <div id="pagination" class="pagination"></div>
+  <footer>
+    <p>© 2025 HueJobs — 450+ trusted companies, thousands of opportunities 🌟</p>
+  </footer>
+</div>
+
+<!-- Modal for company vacancies -->
+<div id="companyModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" id="closeModalBtn">&times;</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  // ------------------- GENERATE 450+ COMPANIES WITH LOGOS AND 21+ VACANCIES EACH -------------------
+  const industriesList = ["Technology", "Design", "Finance", "Healthcare", "Marketing", "Education", "Manufacturing", "Retail"];
+  const companyPrefix = ["Global", "Bright", "Future", "Digital", "Creative", "Innovative", "Prime", "Elite", "Next", "Spark", "Vision", "Stellar", "Radiant", "Vivid", "Peak", "Summit", "Silver", "Golden", "Alpha", "Beta", "Nexus"];
+  const companySuffix = ["Solutions", "Tech", "Labs", "Studio", "Group", "Ventures", "Corp", "Industries", "Media", "Dynamics", "Systems", "Hub", "Works", "Minds", "Forge", "Bridge", "Path", "Edge", "IQ", "Flow"];
+  
+  // Job titles pool for vacancies (21+ per company)
+  const jobTitlePool = [
+    "Software Engineer", "Frontend Developer", "Backend Architect", "Full Stack Developer", "DevOps Engineer",
+    "UI/UX Designer", "Product Designer", "Graphic Designer", "Motion Designer", "Creative Director",
+    "Data Scientist", "Data Analyst", "ML Engineer", "BI Analyst", "Database Admin",
+    "Marketing Manager", "SEO Specialist", "Content Writer", "Social Media Manager", "Growth Hacker",
+    "Sales Executive", "Account Manager", "Customer Success", "Business Analyst", "Project Manager",
+    "Product Owner", "QA Engineer", "Security Analyst", "Cloud Architect", "IT Support",
+    "HR Generalist", "Recruiter", "Financial Analyst", "Operations Manager", "Legal Counsel"
+  ];
+  
+  function getRandomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+  
+  function getRandomColor(seed) {
+    const colors = ["#FF6EC7", "#FFB347", "#2BCBBA", "#3B82F6", "#A06EFF", "#FF8C5A", "#C0E43B", "#FF4D6D"];
+    return colors[seed % colors.length];
+  }
+  
+  function generateCompany(index) {
+    const name1 = getRandomItem(companyPrefix);
+    const name2 = getRandomItem(companySuffix);
+    const name = `${name1} ${name2}`;
+    const industry = getRandomItem(industriesList);
+    const locations = ["San Francisco, CA", "New York, NY", "Austin, TX", "Remote", "Seattle, WA", "Boston, MA", "Los Angeles, CA", "Chicago, IL", "Denver, CO", "Miami, FL", "London, UK", "Berlin, DE"];
+    const location = getRandomItem(locations);
+    // logo letter (first letter of first word)
+    const logoLetter = name.charAt(0).toUpperCase();
+    const logoColor = getRandomColor(index);
+    
+    // generate 21 to 30 vacancies per company
+    const vacancyCount = Math.floor(Math.random() * 15) + 21; // between 21 and 35
+    const vacancies = [];
+    const usedTitles = new Set();
+    for (let i = 0; i < vacancyCount; i++) {
+      let title;
+      do {
+        title = getRandomItem(jobTitlePool);
+      } while (usedTitles.has(title) && usedTitles.size < jobTitlePool.length);
+      usedTitles.add(title);
+      
+      const salary = Math.floor(Math.random() * 80000) + 55000;
+      const type = getRandomItem(["Full-time", "Part-time", "Contract", "Remote"]);
+      const experience = getRandomItem(["Entry Level", "Mid Level", "Senior", "Lead"]);
+      vacancies.push({
+        id: i+1,
+        title: title,
+        salary: salary,
+        type: type,
+        experience: experience,
+        description: `We are looking for an enthusiastic ${title} to join our ${name} team.`
+      });
+    }
+    // ensure at least 21 vacancies
+    while(vacancies.length < 21) {
+      vacancies.push({
+        id: vacancies.length+1,
+        title: "Junior Developer",
+        salary: 60000,
+        type: "Full-time",
+        experience: "Entry Level",
+        description: "Exciting opportunity to grow with us."
+      });
+    }
+    
+    return {
+      id: index,
+      name: name,
+      industry: industry,
+      location: location,
+      logoLetter: logoLetter,
+      logoColor: logoColor,
+      vacancies: vacancies.slice(0, 28), // max 28 but always >=21
+      totalJobs: vacancies.length
+    };
+  }
+  
+  // Generate 460 companies (well over 450)
+  let allCompanies = [];
+  for (let i = 1; i <= 460; i++) {
+    allCompanies.push(generateCompany(i));
+  }
+  console.log(`✅ Generated ${allCompanies.length} companies with 21+ vacancies each.`);
+  
+  // Filtering and pagination
+  let currentPage = 1;
+  const companiesPerPage = 24;
+  let filteredCompanies = [...allCompanies];
+  
+  function filterCompanies() {
+    const searchTerm = document.getElementById('companySearch').value.toLowerCase().trim();
+    const industry = document.getElementById('industryFilter').value;
+    
+    filteredCompanies = allCompanies.filter(company => {
+      let match = true;
+      if (searchTerm && !company.name.toLowerCase().includes(searchTerm)) match = false;
+      if (industry && company.industry !== industry) match = false;
+      return match;
+    });
+    currentPage = 1;
+    updateUI();
+  }
+  
+  function updateUI() {
+    const total = filteredCompanies.length;
+    document.getElementById('companyCount').innerHTML = `${total} companies found`;
+    const totalPages = Math.ceil(total / companiesPerPage);
+    const start = (currentPage - 1) * companiesPerPage;
+    const end = start + companiesPerPage;
+    const pageCompanies = filteredCompanies.slice(start, end);
+    
+    const grid = document.getElementById('companiesGrid');
+    if (pageCompanies.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; background:rgba(255,255,245,0.6); border-radius:48px;">
+        <i class="fas fa-building" style="font-size:3rem; color:#ffb347"></i>
+        <h3>No companies match your search</h3>
+        <p>Try different keywords or industry ✨</p>
+      </div>`;
+    } else {
+      grid.innerHTML = pageCompanies.map(company => `
+        <div class="company-card" data-id="${company.id}">
+          <div class="company-logo" style="background: ${company.logoColor}20; color: ${company.logoColor}; border: 2px solid ${company.logoColor}40;">
+            ${company.logoLetter}
+          </div>
+          <div class="company-name">${escapeHtml(company.name)}</div>
+          <div class="company-industry"><i class="fas fa-tag"></i> ${company.industry}</div>
+          <div class="company-location"><i class="fas fa-map-marker-alt"></i> ${company.location}</div>
+          <div class="job-count-badge"><i class="fas fa-briefcase"></i> ${company.totalJobs} open positions</div>
+        </div>
+      `).join('');
+    }
+    
+    // pagination controls
+    const paginationDiv = document.getElementById('pagination');
+    if (totalPages <= 1) {
+      paginationDiv.innerHTML = '';
+      return;
+    }
+    let paginationHtml = '';
+    paginationHtml += `<button class="page-btn" data-page="prev" ${currentPage === 1 ? 'disabled style="opacity:0.5"' : ''}>‹ Prev</button>`;
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, currentPage + 2);
+    if (startPage > 1) paginationHtml += `<button class="page-btn" data-page="1">1</button>${startPage > 2 ? '<span style="padding:0 8px">...</span>' : ''}`;
+    for (let i = startPage; i <= endPage; i++) {
+      paginationHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+    if (endPage < totalPages) paginationHtml += `${endPage < totalPages - 1 ? '<span style="padding:0 8px">...</span>' : ''}<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+    paginationHtml += `<button class="page-btn" data-page="next" ${currentPage === totalPages ? 'disabled style="opacity:0.5"' : ''}>Next ›</button>`;
+    paginationDiv.innerHTML = paginationHtml;
+    
+    document.querySelectorAll('.page-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const page = btn.getAttribute('data-page');
+        if (page === 'prev' && currentPage > 1) currentPage--;
+        else if (page === 'next' && currentPage < totalPages) currentPage++;
+        else if (!isNaN(parseInt(page))) currentPage = parseInt(page);
+        updateUI();
+        window.scrollTo({ top: 380, behavior: 'smooth' });
+      });
+    });
+  }
+  
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+  
+  // Show modal with company vacancies (minimum 21)
+  function showCompanyModal(company) {
+    const modal = document.getElementById('companyModal');
+    const modalBody = document.getElementById('modalBody');
+    const vacancies = company.vacancies;
+    const vacancyCount = vacancies.length;
+    
+    modalBody.innerHTML = `
+      <div class="modal-header">
+        <div class="modal-logo" style="background: ${company.logoColor};">
+          ${company.logoLetter}
+        </div>
+        <div class="modal-title">
+          <h2>${escapeHtml(company.name)}</h2>
+          <p><i class="fas fa-industry"></i> ${company.industry} &nbsp;|&nbsp; <i class="fas fa-map-marker-alt"></i> ${company.location}</p>
+          <span class="job-count-badge" style="background:#ff6ec7; margin-top:8px; display:inline-block;">🎯 ${vacancyCount} active vacancies</span>
+        </div>
+      </div>
+      <h3 style="margin: 10px 0 15px;"><i class="fas fa-list-ul"></i> Current Openings (${vacancyCount} positions)</h3>
+      <div class="vacancies-list">
+        ${vacancies.map(vac => `
+          <div class="vacancy-item">
+            <div class="vacancy-info">
+              <h4>${escapeHtml(vac.title)}</h4>
+              <p><i class="fas fa-dollar-sign"></i> $${vac.salary.toLocaleString()} / year &nbsp;|&nbsp; <i class="fas fa-clock"></i> ${vac.type} &nbsp;|&nbsp; <i class="fas fa-chart-line"></i> ${vac.experience}</p>
+              <small style="color:#ff8c5a;">${escapeHtml(vac.description.substring(0, 80))}</small>
+            </div>
+            <button class="apply-btn-sm vacancy-apply" data-title="${escapeHtml(vac.title)}" data-company="${escapeHtml(company.name)}">Apply →</button>
+          </div>
+        `).join('')}
+      </div>
+      <div style="margin-top: 20px; text-align: center; font-size: 0.8rem; color:#ff6ec7;">
+        <i class="fas fa-check-circle"></i> ${vacancyCount} exciting opportunities at ${company.name}
+      </div>
+    `;
+    
+    modal.style.display = 'flex';
+    // attach apply button events inside modal
+    document.querySelectorAll('.vacancy-apply').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const jobTitle = btn.getAttribute('data-title');
+        const compName = btn.getAttribute('data-company');
+        alert(`✨ Application initiated!\nPosition: ${jobTitle}\nCompany: ${compName}\n\nYou will be redirected to the application form.`);
+      });
+    });
+  }
+  
+  // event listeners for company cards (delegation)
+  document.getElementById('companiesGrid').addEventListener('click', (e) => {
+    const card = e.target.closest('.company-card');
+    if (card) {
+      const companyId = parseInt(card.getAttribute('data-id'));
+      const company = allCompanies.find(c => c.id === companyId);
+      if (company) {
+        showCompanyModal(company);
+      }
+    }
+  });
+  
+  // modal close
+  const modal = document.getElementById('companyModal');
+  const closeBtn = document.getElementById('closeModalBtn');
+  closeBtn.onclick = () => { modal.style.display = 'none'; };
+  window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+  
+  // search and filter event listeners
+  document.getElementById('companySearch').addEventListener('input', filterCompanies);
+  document.getElementById('industryFilter').addEventListener('change', filterCompanies);
+  
+  // initial render
+  filterCompanies();
+  
+  // verify total unique companies and at least 21 vacancies per each
+  let totalWithMin21 = 0;
+  allCompanies.forEach(comp => {
+    if (comp.vacancies.length >= 21) totalWithMin21++;
+  });
+  console.log(`🔥 Verification: ${totalWithMin21} out of ${allCompanies.length} companies have 21+ vacancies. ✅`);
+</script>
+</body>
+</html>

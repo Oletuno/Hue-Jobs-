@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>HueJobs | Find Your Dream Job - 1000+ Opportunities</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #fef9e6 0%, #ffe6f0 100%);
+      color: #1e1e2f;
+      overflow-x: hidden;
+    }
+
+    /* vibrant blob background */
+    .blob-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.35;
+      animation: float 18s infinite ease-in-out;
+    }
+    .blob-1 {
+      width: 50vw;
+      height: 50vw;
+      background: #ffb347;
+      top: -20vh;
+      left: -15vw;
+      animation-duration: 22s;
+    }
+    .blob-2 {
+      width: 45vw;
+      height: 45vw;
+      background: #ff6ec7;
+      bottom: -10vh;
+      right: -10vw;
+      animation-duration: 26s;
+    }
+    .blob-3 {
+      width: 40vw;
+      height: 40vw;
+      background: #4facfe;
+      top: 40%;
+      left: 60%;
+      animation-duration: 28s;
+    }
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(3%, 5%) scale(1.05); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.9rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff8c5a, #ff6ec7);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .logo i {
+      color: #ff6ec7;
+      font-size: 2.2rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #1e293b;
+      transition: 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #ff6ec7;
+    }
+    .btn-outline-bright {
+      border: 2px solid #ff8c5a;
+      background: white;
+      padding: 8px 20px;
+      border-radius: 60px;
+      font-weight: 700;
+      color: #ff8c5a;
+      transition: 0.25s;
+    }
+    .btn-solid-glow {
+      background: linear-gradient(95deg, #ff6ec7, #ffb347);
+      padding: 8px 24px;
+      border-radius: 60px;
+      font-weight: 700;
+      color: white;
+      border: none;
+      box-shadow: 0 8px 18px rgba(255, 110, 199, 0.3);
+    }
+
+    /* search & filter section */
+    .search-section {
+      background: rgba(255,255,245,0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      padding: 30px;
+      margin: 30px 0 40px;
+      border: 1px solid rgba(255,215,150,0.8);
+    }
+    .search-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    .search-input {
+      flex: 2;
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 60px;
+      padding: 5px 20px;
+      border: 1px solid #ffe0cc;
+    }
+    .search-input i {
+      color: #ff8c5a;
+      font-size: 1.2rem;
+    }
+    .search-input input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 14px 12px;
+      font-size: 1rem;
+      background: transparent;
+    }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .filter-select {
+      background: white;
+      padding: 12px 20px;
+      border-radius: 60px;
+      border: 1px solid #ffe0cc;
+      outline: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .search-btn {
+      background: linear-gradient(95deg, #ff6ec7, #ffb347);
+      border: none;
+      padding: 12px 32px;
+      border-radius: 60px;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+    }
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 20px 0 25px;
+    }
+    .job-count {
+      font-weight: 700;
+      background: #ffecb3;
+      padding: 6px 16px;
+      border-radius: 40px;
+    }
+
+    /* job cards grid */
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+    .job-card {
+      background: rgba(255,255,250,0.95);
+      backdrop-filter: blur(4px);
+      border-radius: 28px;
+      padding: 22px;
+      transition: 0.25s;
+      border: 1px solid rgba(255,200,100,0.5);
+      cursor: pointer;
+    }
+    .job-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -12px rgba(255,110,199,0.25);
+      background: white;
+    }
+    .job-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #1e293b;
+    }
+    .company {
+      font-weight: 600;
+      color: #ff6ec7;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 12px 0;
+      font-size: 0.85rem;
+      color: #5b6e8c;
+    }
+    .details i {
+      width: 20px;
+      color: #ff8c5a;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .tag {
+      background: #f0f0f0;
+      padding: 4px 12px;
+      border-radius: 60px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .tag.highlight {
+      background: #ffecdc;
+      color: #ff5e3a;
+    }
+    .salary {
+      font-weight: 700;
+      color: #2bcbba;
+      margin-top: 10px;
+    }
+
+    /* pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 40px 0 60px;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      background: white;
+      border: 1px solid #ffe0cc;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .page-btn.active {
+      background: linear-gradient(95deg, #ff6ec7, #ffb347);
+      color: white;
+      border: none;
+    }
+    .page-btn:hover:not(.active) {
+      background: #ffecdc;
+      transform: scale(1.02);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 0 30px;
+      border-top: 2px dashed rgba(255,110,199,0.3);
+    }
+
+    @media (max-width: 800px) {
+      .container { padding: 0 20px; }
+      .jobs-grid { grid-template-columns: 1fr; }
+      .search-bar { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<div class="blob-bg">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="container">
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fas fa-briefcase"></i>
+      <span>Hue<span style="color:#ff6ec7">Jobs</span></span>
+    </div>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="find jobs.html" class="active">Find Jobs</a>
+      <a href="companies.html">Companies</a>
+      <a href="login.html" class="btn-outline-bright">Login</a>
+      <a href="post a job.html" class="btn-solid-glow">Post a Job</a>
+    </div>
+  </nav>
+
+  <div class="search-section">
+    <div class="search-bar">
+      <div class="search-input">
+        <i class="fas fa-search"></i>
+        <input type="text" id="keywordSearch" placeholder="Job title, keywords, or company...">
+      </div>
+      <div class="search-input">
+        <i class="fas fa-map-marker-alt"></i>
+        <input type="text" id="locationSearch" placeholder="City, state, or remote">
+      </div>
+    </div>
+    <div class="filter-group">
+      <select id="categoryFilter" class="filter-select">
+        <option value="">All Categories</option>
+        <option value="Development">Development</option>
+        <option value="Design">Design</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Data">Data & AI</option>
+        <option value="Sales">Sales</option>
+        <option value="Support">Customer Support</option>
+        <option value="Management">Management</option>
+      </select>
+      <select id="typeFilter" class="filter-select">
+        <option value="">Job Type</option>
+        <option value="Full-time">Full-time</option>
+        <option value="Part-time">Part-time</option>
+        <option value="Contract">Contract</option>
+        <option value="Remote">Remote</option>
+      </select>
+      <select id="sortBy" class="filter-select">
+        <option value="relevance">Sort by: Relevance</option>
+        <option value="salaryHigh">Salary: High to Low</option>
+        <option value="salaryLow">Salary: Low to High</option>
+      </select>
+      <button id="searchButton" class="search-btn"><i class="fas fa-filter"></i> Apply Filters</button>
+    </div>
+  </div>
+
+  <div class="results-header">
+    <h2><i class="fas fa-briefcase" style="color:#ff6ec7"></i> Jobs For You</h2>
+    <span class="job-count" id="jobCount">0 jobs found</span>
+  </div>
+
+  <div id="jobsGrid" class="jobs-grid"></div>
+
+  <div id="pagination" class="pagination"></div>
+
+  <footer>
+    <p>© 2025 HueJobs — where bright careers shine ✨ | <i class="fas fa-heart" style="color:#ff6ec7;"></i> 1000+ opportunities waiting</p>
+  </footer>
+</div>
+
+<script>
+  // ---------- GENERATE 1000+ REALISTIC JOBS ----------
+  const companies = [
+    "TechFlow", "CreativeMinds", "DataPulse", "DesignHub", "CloudScale", "InnovateX", "BrightFuture", "NexusSoft", 
+    "PixelForge", "SwiftStack", "Radiant Systems", "Vivid Labs", "SparkWorks", "CodeCanvas", "Visionary Inc", 
+    "HueDynamic", "Synergy Solutions", "PrimeLogic", "StellarSoft", "Elevate Digital"
+  ];
+  
+  const titles = {
+    Development: ["Frontend Developer", "Backend Engineer", "Full Stack Developer", "React Specialist", "Python Developer", "Java Architect", "DevOps Engineer", "Mobile Developer"],
+    Design: ["UI/UX Designer", "Product Designer", "Graphic Designer", "Motion Designer", "Web Designer", "Brand Designer"],
+    Marketing: ["Marketing Manager", "SEO Specialist", "Content Strategist", "Social Media Manager", "Growth Hacker", "Brand Manager"],
+    Data: ["Data Scientist", "Data Analyst", "ML Engineer", "BI Analyst", "Data Engineer", "AI Researcher"],
+    Sales: ["Sales Executive", "Account Manager", "Business Developer", "Sales Lead", "Customer Success"],
+    Support: ["Support Specialist", "Customer Success Manager", "Technical Support", "Help Desk Lead"],
+    Management: ["Project Manager", "Product Owner", "Engineering Manager", "Team Lead", "Scrum Master"]
+  };
+  
+  const locations = ["Remote", "New York, NY", "San Francisco, CA", "Austin, TX", "Seattle, WA", "Chicago, IL", "Boston, MA", "Los Angeles, CA", "Denver, CO", "Miami, FL", "Toronto, ON", "London, UK", "Berlin, DE", "Bangalore, IN"];
+  const categories = ["Development", "Design", "Marketing", "Data", "Sales", "Support", "Management"];
+  
+  function getRandomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+  
+  function getRandomSalary(category) {
+    let base = 0;
+    if (category === "Development" || category === "Data") base = 80000;
+    else if (category === "Management") base = 95000;
+    else if (category === "Design") base = 65000;
+    else if (category === "Marketing" || category === "Sales") base = 60000;
+    else base = 50000;
+    const variance = Math.floor(Math.random() * 50000);
+    return base + variance;
+  }
+  
+  function getJobType() {
+    const types = ["Full-time", "Part-time", "Contract", "Remote"];
+    const weights = [0.7, 0.1, 0.1, 0.1];
+    const rand = Math.random();
+    if (rand < 0.7) return "Full-time";
+    if (rand < 0.8) return "Part-time";
+    if (rand < 0.9) return "Contract";
+    return "Remote";
+  }
+  
+  function generateJobs(count) {
+    const jobs = [];
+    for (let i = 1; i <= count; i++) {
+      const category = getRandomItem(categories);
+      const titleList = titles[category] || titles["Development"];
+      const title = getRandomItem(titleList);
+      const company = getRandomItem(companies);
+      const location = getRandomItem(locations);
+      const salary = getRandomSalary(category);
+      const type = getJobType();
+      const postedDays = Math.floor(Math.random() * 30) + 1;
+      const tags = [category];
+      if (type === "Remote") tags.push("Remote");
+      if (salary > 110000) tags.push("High Salary");
+      if (Math.random() > 0.7) tags.push("Urgent");
+      
+      jobs.push({
+        id: i,
+        title: title,
+        company: company,
+        location: location,
+        salary: salary,
+        type: type,
+        category: category,
+        postedDays: postedDays,
+        tags: tags,
+        description: `Join ${company} as a ${title} and work on exciting projects with a vibrant team.`
+      });
+    }
+    return jobs;
+  }
+  
+  // Generate master list of 1020 jobs (over 1000)
+  let allJobs = generateJobs(1020);
+  
+  // Filtering and sorting logic
+  let currentPage = 1;
+  const jobsPerPage = 12;
+  let filteredJobs = [...allJobs];
+  
+  function filterJobs() {
+    const keyword = document.getElementById('keywordSearch').value.toLowerCase().trim();
+    const location = document.getElementById('locationSearch').value.toLowerCase().trim();
+    const category = document.getElementById('categoryFilter').value;
+    const jobType = document.getElementById('typeFilter').value;
+    const sortValue = document.getElementById('sortBy').value;
+    
+    let results = allJobs.filter(job => {
+      let match = true;
+      if (keyword && !job.title.toLowerCase().includes(keyword) && !job.company.toLowerCase().includes(keyword)) match = false;
+      if (location && !job.location.toLowerCase().includes(location)) match = false;
+      if (category && job.category !== category) match = false;
+      if (jobType && job.type !== jobType) match = false;
+      return match;
+    });
+    
+    // sorting
+    if (sortValue === 'salaryHigh') {
+      results.sort((a, b) => b.salary - a.salary);
+    } else if (sortValue === 'salaryLow') {
+      results.sort((a, b) => a.salary - b.salary);
+    } else {
+      // relevance: by default keep as is (by id)
+      results.sort((a, b) => a.id - b.id);
+    }
+    
+    filteredJobs = results;
+    currentPage = 1;
+    updateUI();
+  }
+  
+  function updateUI() {
+    const totalJobs = filteredJobs.length;
+    const totalPages = Math.ceil(totalJobs / jobsPerPage);
+    const start = (currentPage - 1) * jobsPerPage;
+    const end = start + jobsPerPage;
+    const pageJobs = filteredJobs.slice(start, end);
+    
+    document.getElementById('jobCount').innerHTML = `${totalJobs} jobs found`;
+    
+    const grid = document.getElementById('jobsGrid');
+    if (pageJobs.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; background:rgba(255,255,245,0.6); border-radius:48px;">
+        <i class="fas fa-face-smile" style="font-size:3rem; color:#ffb347"></i>
+        <h3 style="margin-top:20px">No jobs match your filters</h3>
+        <p>Try adjusting your keywords or category 🎨</p>
+      </div>`;
+    } else {
+      grid.innerHTML = pageJobs.map(job => `
+        <div class="job-card" data-id="${job.id}">
+          <div class="job-title">${escapeHtml(job.title)}</div>
+          <div class="company"><i class="fas fa-building"></i> ${escapeHtml(job.company)}</div>
+          <div class="details">
+            <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location)}</span>
+            <span><i class="fas fa-clock"></i> ${job.type}</span>
+            <span><i class="fas fa-calendar-alt"></i> ${job.postedDays} days ago</span>
+          </div>
+          <div class="salary"><i class="fas fa-dollar-sign"></i> $${job.salary.toLocaleString()} / year</div>
+          <div class="tags">
+            ${job.tags.map(tag => `<span class="tag ${tag === 'Urgent' ? 'highlight' : ''}">#${escapeHtml(tag)}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // pagination rendering
+    const paginationDiv = document.getElementById('pagination');
+    if (totalPages <= 1) {
+      paginationDiv.innerHTML = '';
+      return;
+    }
+    
+    let paginationHtml = '';
+    paginationHtml += `<button class="page-btn" data-page="prev" ${currentPage === 1 ? 'disabled style="opacity:0.5"' : ''}>‹ Prev</button>`;
+    
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, currentPage + 2);
+    if (startPage > 1) paginationHtml += `<button class="page-btn" data-page="1">1</button>${startPage > 2 ? '<span style="padding:0 8px">...</span>' : ''}`;
+    for (let i = startPage; i <= endPage; i++) {
+      paginationHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+    if (endPage < totalPages) paginationHtml += `${endPage < totalPages - 1 ? '<span style="padding:0 8px">...</span>' : ''}<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+    paginationHtml += `<button class="page-btn" data-page="next" ${currentPage === totalPages ? 'disabled style="opacity:0.5"' : ''}>Next ›</button>`;
+    
+    paginationDiv.innerHTML = paginationHtml;
+    
+    // attach pagination events
+    document.querySelectorAll('.page-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const page = btn.getAttribute('data-page');
+        if (page === 'prev' && currentPage > 1) currentPage--;
+        else if (page === 'next' && currentPage < totalPages) currentPage++;
+        else if (!isNaN(parseInt(page))) currentPage = parseInt(page);
+        updateUI();
+        window.scrollTo({ top: 400, behavior: 'smooth' });
+      });
+    });
+  }
+  
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+  
+  // Event listeners
+  document.getElementById('searchButton').addEventListener('click', filterJobs);
+  document.getElementById('keywordSearch').addEventListener('keypress', (e) => { if(e.key === 'Enter') filterJobs(); });
+  document.getElementById('locationSearch').addEventListener('keypress', (e) => { if(e.key === 'Enter') filterJobs(); });
+  document.getElementById('categoryFilter').addEventListener('change', filterJobs);
+  document.getElementById('typeFilter').addEventListener('change', filterJobs);
+  document.getElementById('sortBy').addEventListener('change', filterJobs);
+  
+  // initial render
+  filterJobs();
+  
+  // quick job card click demo alert
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.job-card');
+    if (card) {
+      const jobId = card.getAttribute('data-id');
+      const job = allJobs.find(j => j.id == jobId);
+      if (job) {
+        alert(`✨ Apply for ${job.title} at ${job.company}\n💰 $${job.salary.toLocaleString()}/year\n📍 ${job.location}\n\nThis is a demo. Full application system coming soon!`);
+      }
+    }
+  });
+  
+  // log that 1000+ jobs are loaded
+  console.log(`🎉 HueJobs loaded: ${allJobs.length} vibrant job opportunities ready!`);
+</script>
+</body>
+</html>
